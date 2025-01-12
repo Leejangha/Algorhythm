@@ -5,25 +5,28 @@ def solution(progresses, speeds):
     queue = deque([])
     
     for p, s in zip(progresses, speeds):
-        a, b = divmod(100-p, s)
-        if b != 0:
-            a += 1
-        queue.append(a)
-
-    cnt = 0
+        p = 100 - p
+        if p % s == 0:
+            queue.append(p//s)
+        else:
+            queue.append(p//s + 1)
+    
+    now = queue.popleft()
+    cnt = 1
+    
     while queue:
-        d = queue.popleft()
-        cnt += 1
-        
-        if queue:
-            while queue[0] <= d:
+        if not queue:
+            answer.append(cnt)
+            now = queue.popleft()
+            cnt = 1
+        else:
+            if queue[0] <= now:
                 queue.popleft()
                 cnt += 1
-                
-                if not queue:
-                    break
-            
-        answer.append(cnt)
-        cnt = 0
+            else:
+                answer.append(cnt)
+                now = queue.popleft()
+                cnt = 1
 
+    answer.append(cnt)
     return answer
