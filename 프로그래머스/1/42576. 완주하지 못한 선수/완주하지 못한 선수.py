@@ -1,12 +1,5 @@
 def solution(participant, completion):
-    answer = ''
-    temp = 0
-    dic = {}
-    for part in participant:
-        dic[hash(part)] = part
-        temp += int(hash(part))
-    for com in completion:
-        temp -= hash(com)
-    answer = dic[temp]
-
-    return answer
+    hash_loser=sum([hash(a) for a in participant])-sum([hash(a) for a in completion])
+    for a in participant:
+        if hash(a)==hash_loser:
+            return a
