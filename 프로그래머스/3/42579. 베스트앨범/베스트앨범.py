@@ -3,8 +3,7 @@ def solution(genres, plays):
     DICT = {}
     sum_plays = {}
     
-    for i in range(len(genres)):
-        g, p = genres[i], plays[i]
+    for i, (g, p) in enumerate(zip(genres, plays)):
         if g not in DICT:
             DICT[g] = [(i,p)]
             sum_plays[g] = p
