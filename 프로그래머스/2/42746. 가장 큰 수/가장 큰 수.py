@@ -1,12 +1,19 @@
-import functools
-
-def comparator(a,b):
-    t1 = a+b
-    t2 = b+a
-    return (int(t1) > int(t2)) - (int(t1) < int(t2)) #  t1이 크다면 1  // t2가 크다면 -1  //  같으면 0
-
 def solution(numbers):
-    n = [str(x) for x in numbers]
-    n = sorted(n, key=functools.cmp_to_key(comparator),reverse=True)
-    answer = str(int(''.join(n)))
-    return answer
+    # 퀵 정렬 구현
+    def Sort(x):
+        if len(x) <= 1:
+            return x
+        
+        pivot = x[len(x)//2]
+        left, right, equal = [], [], []
+        for a in x:
+            if a + pivot < pivot + a:
+                right.append(a)
+            elif a + pivot > pivot + a:
+                left.append(a)
+            else:
+                equal.append(a)
+        return Sort(left) + equal + Sort(right)
+    
+    numbers = list(map(str, numbers))
+    return str(int("".join(Sort(numbers))))
