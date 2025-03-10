@@ -1,6 +1,4 @@
 def solution(numbers):
-    if set(numbers) == {0}:
-        return "0"
     # 퀵 정렬 구현
     def Sort(x):
         if len(x) <= 1:
@@ -18,4 +16,4 @@ def solution(numbers):
         return Sort(left) + equal + Sort(right)
     
     numbers = list(map(str, numbers))
-    return "".join(Sort(numbers))
+    return str(int("".join(Sort(numbers))))
