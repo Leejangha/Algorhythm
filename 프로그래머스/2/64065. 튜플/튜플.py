@@ -1,6 +1,6 @@
 def solution(s):
     answer = []
-    tuples = sorted(list(s[2:-2].split("},{")), key = lambda x : len(x))
+    tuples = sorted(list(s[2:-2].split("},{")), key = len)
     for idx, tup in enumerate(tuples):
         tup = list(tup.split(","))
         i = 0
