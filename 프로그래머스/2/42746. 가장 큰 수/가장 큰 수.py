@@ -1,19 +1,16 @@
 def solution(numbers):
-    # 퀵 정렬 구현
-    def Sort(x):
-        if len(x) <= 1:
-            return x
-        
-        pivot = x[len(x)//2]
-        left, right, equal = [], [], []
-        for a in x:
-            if a + pivot < pivot + a:
-                right.append(a)
-            elif a + pivot > pivot + a:
-                left.append(a)
-            else:
-                equal.append(a)
-        return Sort(left) + equal + Sort(right)
-    
-    numbers = list(map(str, numbers))
-    return str(int("".join(Sort(numbers))))
+    answer = ''
+    numbers = [str(i) for i in numbers] # 문자열 정렬을 선택 => 자릿수끼리 비교해야 하니까
+    numbers.sort(key=lambda x:x*3, reverse=True)
+    # numbers의 각 원소는 1000이하 (최대 4자리)
+    # '34'와 '3'을 비교한다고 가정 => 34가 3보다 앞에 있어야함
+    # 처음 생각: 맨 앞자리부터 하나하나씩 비교해야 함, 이때, 자릿수가 다르면 작은 자릿수를 가진 쪽에서 멈춰야함
+    # 예) 1번째 비교 => "34"의 '3' vs "3"의 '3' 2번째 비교 => "34"의 '4' vs "3"의 '3'[멈춰서 비교]
+    # '30'과 '3'을 비교했을때는 3이 30보다 앞에 있어야함
+    # '멈춰서 비교' 한다는 그 함수를 구현하고 lambda에 넣기 어렵다고 판단..
+    # 이를 해결하기 위해, 문자를 반복해서 적고 그것들로 비교 (앞에서 최대 2자리[자릿수가 가장 많은 수의 자릿수]까지만 비교할거고 그 이후의 자릿수 비교는 무의미)
+    # 34 vs 3 => '34343434' (big) vs '3333', '30' vs '3' => '30303030' vs '3333' (big)
+    # (str) * 4 => (str)(str)(str)(str)
+    answer = "".join(numbers) if sum([int(i) for i in numbers]) != 0 else '0'
+    # 11번만 틀리길래 찾아보니 [0,0,0,0]인 경우엔 답이 '0' 이라길래 코드 수정
+    return answer
