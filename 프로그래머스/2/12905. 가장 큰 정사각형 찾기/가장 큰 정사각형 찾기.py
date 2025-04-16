@@ -31,7 +31,6 @@
 #     return (l-1)**2
 
 def solution(board):
-
     max_s = 0
     if 1 in board[0] or 1 in list(zip(*board))[0]:
         max_s = 1
