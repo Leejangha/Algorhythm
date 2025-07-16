@@ -1,23 +1,21 @@
 import sys
 
-front = list(sys.stdin.readline())[:-1]
-M = int(sys.stdin.readline())
-operators = [sys.stdin.readline().split() for _ in range(M)]
+input = sys.stdin.read().splitlines()
+
+front = list(input[0])
+M = int(input[1])
+operators = input[2:]
 
 back = []
 
 for op in operators:
     if op[0] == "L" and front:
-        w = front.pop()
-        back.append(w)
+        back.append(front.pop())
     elif op[0] == "D" and back:
-        w = back.pop()
-        front.append(w)
+        front.append(back.pop())
     elif op[0] == "B" and front:
         front.pop()
     elif op[0] == "P":
-        w = op[-1]
-        front.append(w)
+        front.append(op[-1])
 
-answer = ''.join(front + back[::-1])
-print(answer)
+print(''.join(front + back[::-1]))
