@@ -3,8 +3,8 @@ def solution(schedules, timelogs, startday):
     n = len(schedules)
     for i in range(n):
         h, m = divmod(schedules[i], 100)
-        h2, m = divmod(m+10, 60)
-        schedules[i] = (h + h2) * 100 + m
+        h2, m2 = divmod(h * 60 + m+10, 60)
+        schedules[i] = h2 * 100 + m2
     for i in range(n):
         flag = True
         for j in range(7):
